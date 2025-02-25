@@ -2,7 +2,7 @@ package com.example.EmployeePayroll_App.dto;
 
 public class EmployeeDTO {
 
-    //UC_01 (Section -2)Handling Employee Payroll DTO and Model
+    //UC_01 & Uc_02(Section -2)Handling Employee Payroll DTO and Model
     private String name;
     private double salary;
 
