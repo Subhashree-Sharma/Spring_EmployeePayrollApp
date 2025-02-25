@@ -1,25 +1,43 @@
 package com.example.EmployeePayroll_App.controller;
 import com.example.EmployeePayroll_App.model.Employee;
+import com.example.EmployeePayroll_App.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
-import java.util.Arrays;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    //UC_01
+    //UC_02
+    private final EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
     @GetMapping
     public List<Employee> getAllEmployees() {
-        return Arrays.asList(
-                new Employee(1, "Subhashree Sharma", 50000),
-                new Employee(2, "Sonali Sharma", 60000)
-        );
+        return employeeService.getAllEmployees();
+    }
+
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(@PathVariable int id) {
+        return employeeService.getEmployeeById(id);
     }
 
     @PostMapping
     public Employee addEmployee(@RequestBody Employee employee) {
-        //In future, this will be stored in DB
-        return employee;
+        return employeeService.addEmployee(employee);
+    }
+
+    @PutMapping("/{id}")
+    public Employee updateEmployee(@PathVariable int id, @RequestBody Employee employee) {
+        return employeeService.updateEmployee(id, employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployee(@PathVariable int id) {
+        employeeService.deleteEmployee(id);
     }
 }
