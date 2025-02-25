@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-    //UC_01 (Section -2) Handling Employee Payroll DTO and Model
+    //UC_01 & Uc_02 (Section -2) Handling Employee Payroll DTO and Model
     @Autowired
     private EmployeeRepository employeeRepository;
 

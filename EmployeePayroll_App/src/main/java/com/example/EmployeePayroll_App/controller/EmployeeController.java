@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    //UC_01 (Section -2)Handling Employee Payroll DTO and Model
+    //UC_01 & Uc_02(Section -2)Handling Employee Payroll DTO and Model
     @Autowired
     private EmployeeService employeeService;
 
