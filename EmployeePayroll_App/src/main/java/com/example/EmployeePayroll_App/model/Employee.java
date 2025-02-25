@@ -10,22 +10,62 @@ import lombok.*;
 @Table(name = "employee_table")
 @Getter
 @Setter
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class Employee {
-    //UC_02
 
-    //Every entity must have an ID
+    //UC_01 (Section -2)Handling Employee Payroll DTO and Model
     @Id
-    // Auto-increment primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    //Ensure this column exists
-    @Column(name = "name", nullable = false)
+    private Long id;
     private String name;
-
-    @Column(name = "salary", nullable = false)
     private double salary;
+
+    public Employee() {
+    }
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+//    //UC_02
+//    //Every entity must have an ID
+//    @Id
+//    //Auto-increment primary key
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int id;
+//
+//    //Ensure this column exists
+//    @Column(name = "name", nullable = false)
+//    private String name;
+//
+//    @Column(name = "salary", nullable = false)
+//    private double salary;
+
 }
