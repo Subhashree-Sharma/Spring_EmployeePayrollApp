@@ -1,15 +1,31 @@
 package com.example.EmployeePayroll_App.service;
 import com.example.EmployeePayroll_App.dto.EmployeeDTO;
+import com.example.EmployeePayroll_App.exception.EmployeeNotFoundException;
 import com.example.EmployeePayroll_App.model.Employee;
 import com.example.EmployeePayroll_App.repository.EmployeeRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class EmployeeService {
 
+    //Uc_03 (Section -4)
+    private final List<Employee> employeeList = new ArrayList<>();
+
+    public Employee getEmployeeById(Integer id) {
+        return employeeList.stream()
+                .filter(employee -> employee.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee with ID " + id + " not found."));
+    }
+
+
+
+    //Uc_02  &  Uc_03 (Section -4)
     private final EmployeeRepository employeeRepository;
 
     public EmployeeService(EmployeeRepository employeeRepository) {
