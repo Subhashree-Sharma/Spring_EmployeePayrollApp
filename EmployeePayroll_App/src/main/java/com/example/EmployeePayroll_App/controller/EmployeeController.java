@@ -3,6 +3,10 @@ import com.example.EmployeePayroll_App.dto.EmployeeDTO;
 import com.example.EmployeePayroll_App.model.Employee;
 import com.example.EmployeePayroll_App.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,20 +14,40 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    //UC_01 & Uc_02 & Uc_03(Section -2)Handling Employee Payroll DTO and Model
-    //UC_01  & Uc_04 (Section -3)
-    @Autowired
-    private EmployeeService employeeService;
+    //UC_01 (Section -4)
+    private final EmployeeService employeeService;
 
-    @PostMapping("/add")
-    public Employee addEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        return employeeService.addEmployee(new Employee(employeeDTO.getName(), employeeDTO.getSalary()));
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
-    @GetMapping("/all")
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    // Create Employee - Validates Name Field
+    @PostMapping
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
+        Employee createdEmployee = employeeService.createEmployee(employeeDTO);
+        return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
     }
+
+    // Update Employee - Validates Name Field
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Integer id, @Valid @RequestBody EmployeeDTO employeeDTO) {
+        Employee updatedEmployee = employeeService.updateEmployee(id, employeeDTO);
+        return ResponseEntity.ok(updatedEmployee);
+    }
+//    //UC_01 & Uc_02 & Uc_03(Section -2)Handling Employee Payroll DTO and Model
+//    //UC_01 & Uc_04 (Section -3)
+//    @Autowired
+//    private EmployeeService employeeService;
+//
+//    @PostMapping("/add")
+//    public Employee addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+//        return employeeService.addEmployee(new Employee(employeeDTO.getName(), employeeDTO.getSalary()));
+//    }
+//
+//    @GetMapping("/all")
+//    public List<Employee> getAllEmployees() {
+//        return employeeService.getAllEmployees();
+//    }
 
     //UC_02
 //    private final EmployeeService employeeService;
