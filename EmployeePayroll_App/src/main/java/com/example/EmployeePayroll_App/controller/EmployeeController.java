@@ -14,8 +14,8 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    //UC_01 (Section -4)
-    private final EmployeeService employeeService;
+    //UC_01 & UC_03 (Section -4)
+    private EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -34,6 +34,13 @@ public class EmployeeController {
         Employee updatedEmployee = employeeService.updateEmployee(id, employeeDTO);
         return ResponseEntity.ok(updatedEmployee);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) {
+        Employee employee = employeeService.getEmployeeById(id);
+        return ResponseEntity.ok(employee);
+    }
+
 //    //UC_01 & Uc_02 & Uc_03(Section -2)Handling Employee Payroll DTO and Model
 //    //UC_01 & Uc_04 (Section -3)
 //    @Autowired
